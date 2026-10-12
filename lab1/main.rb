@@ -14,11 +14,14 @@ words = [
   "клас", "блок", "пайп", "об'єкт", "термінал"
 ]
 
-even_words = words.select { |word| (word.length % 2).zero? }
+even_words_v1 = words.select { |word| (word.length % 2).zero? }
+
+even_words_v2 = words.filter { |word| word.length.even? }
 
 puts "Завдання 2"
 puts "Початкові слова: #{words.inspect}"
-puts "Слова парної довжини: #{even_words.inspect}\n\n"
+puts "Спосіб 1 (select + zero?): #{even_words_v1.inspect}"
+puts "Спосіб 2 (filter + even?):  #{even_words_v2.inspect}\n\n"
 
 
 numbers = [4, 9, 16, 25, 36, 49, 64, 81, 100]
@@ -42,10 +45,17 @@ currencies = [
   { currency: "CAD", rate: 30.15, change: 0.00 }
 ]
 
-growing = currencies.select { |c| c[:change] > 0 }.sort_by { |c| c[:change] }
+growing_v1 = currencies.select { |c| c[:change] > 0 }.sort_by { |c| c[:change] }
+
+growing_v2 = currencies.reject { |c| c[:change] <= 0 }.sort { |a, b| a[:change] <=> b[:change] }
 
 puts "Завдання 4"
-puts "Валюти, що зросли в ціні:"
-growing.each do |c|
+puts "Спосіб 1 (select + sort_by)"
+growing_v1.each do |c|
+  puts "#{c[:currency]}: курс #{c[:rate]} грн (зростання +#{c[:change]})"
+end
+
+puts "\nСпосіб 2 (reject + sort <=>)"
+growing_v2.each do |c|
   puts "#{c[:currency]}: курс #{c[:rate]} грн (зростання +#{c[:change]})"
 end
