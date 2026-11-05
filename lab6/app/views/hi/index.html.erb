@@ -1,0 +1,13 @@
+<html>
+<head><title>Hi <%= @student %>!</title></head>
+<body>
+<h2>Hello, <%= @student %>!</h2>
+
+<p>Час <%= @time %>,</p>
+<p>Це вітання прибуло з app/views/hi/index.html.erb</p>
+
+<% 5.times do |i| %>
+  <p>Моє повідомлення <%= i %> <%= @message %></p>
+<% end %>
+</body>
+</html>
