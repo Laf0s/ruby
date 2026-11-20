@@ -1,0 +1,54 @@
+<header class="bg-white border-bottom shadow-sm py-3">
+  <div class="container d-flex flex-wrap align-items-center justify-content-between gap-3">
+    <div class="d-flex align-items-center gap-3">
+      <%= link_to "Притулок для тварин", root_path, class: "fs-5 fw-bold text-decoration-none text-dark" %>
+      <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#donateModal">
+        Donate / Допомогти
+      </button>
+    </div>
+
+    <ul class="nav nav-pills gap-1">
+      <li class="nav-item">
+        <%= link_to "Показати всіх тварин", animals_path,
+                    class: "nav-link #{'active' if current_page?(animals_path) || current_page?(root_path)}" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Створити тварину", new_animal_path,
+                    class: "nav-link #{'active' if current_page?(new_animal_path)}" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Про проєкт", about_path,
+                    class: "nav-link #{'active' if current_page?(about_path)}" %>
+      </li>
+      <li class="nav-item">
+        <%= button_to "Видалити всіх тварин", destroy_all_animals_path,
+                      method: :delete,
+                      class: "nav-link text-danger",
+                      form: { data: { turbo_confirm: "Ви впевнені, що хочете видалити всі записи?" } } %>
+      </li>
+    </ul>
+  </div>
+</header>
+
+<div class="modal fade" id="donateModal" tabindex="-1" aria-labelledby="donateModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="donateModalLabel">Допомога притулку для тварин</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрити"></button>
+      </div>
+      <div class="modal-body">
+        <p class="mb-3">Зібрані кошти йдуть на корм, лікування та утримання тварин у притулку.</p>
+        <div class="p-3 bg-light border rounded">
+          <p class="mb-1"><strong>Отримувач:</strong> БФ «Притулок для тварин»</p>
+          <p class="mb-1"><strong>ЄДРПОУ:</strong> 12345678</p>
+          <p class="mb-1"><strong>IBAN:</strong> <code>UA123000010000026001234567890</code></p>
+          <p class="mb-0"><strong>Призначення:</strong> Благодійна допомога тваринам</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрити</button>
+      </div>
+    </div>
+  </div>
+</div>

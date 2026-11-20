@@ -1,24 +1,27 @@
-# README
+# Лабораторна робота №6–7 (Варіант 35)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+**Тема:** Робота з компонентами MVC-RoR проєкту  
+**Предметна область:** Притулок для тварин
 
-Things you may want to cover:
+## Завдання
+1. **Завдання 1:** Відкрити проєкт ЛР6 та додати модель `Animal` (`name`, `species`, `age`, `status`, `description`).
+2. **Завдання 2:** Додати до проєкту хедер (`_header.html.erb`) і футер (`_footer.html.erb`) у спільному макеті `application.html.erb`.
+3. **Завдання 3:** У футері розмістити контактну інформацію про розробника та реквізити благодійного фонду.
+4. **Завдання 4:** Підключити фреймворк Bootstrap (`gem "bootstrap"` + `gem "dartsass-rails"`).
+5. **Завдання 5:** Розмістити навігаційну панель `nav-pills` у хедері та вкладки (`Шукають дім` / `Влаштовані` / `Потрібна допомога`) із `tab-content`, а також кнопку `Donate / Допомогти`.
+6. **Завдання 6:** Приєднати маршрути: «Показати всіх тварин», «Створити тварину», «Про проєкт» (`about`), «Видалити всіх тварин» (`destroy_all`).
+7. **Завдання 7:** Видалити зі сторінок дії, які продубльовані в навбарі.
 
-* Ruby version
+## Запуск
+```bash
+cd lab6
+bin/rails db:migrate
+bin/rails db:seed
+bin/rails server
+```
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Тести
+```bash
+cd lab6
+bin/rails test
+```

@@ -1,0 +1,16 @@
+$primary: #3b5949;
+$secondary: #6c757d;
+
+@import "bootstrap";
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f9f9f7;
+  color: #222;
+}
+
+main {
+  flex: 1;
+}

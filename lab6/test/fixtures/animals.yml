@@ -1,0 +1,13 @@
+one:
+  name: Bobik
+  species: Dog
+  age: 3
+  status: Шукають дім
+  description: Friendly dog
+
+two:
+  name: Murka
+  species: Cat
+  age: 2
+  status: Влаштовані
+  description: Calm cat
