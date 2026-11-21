@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+  <div class="col-lg-6">
+    <div class="bg-white border rounded p-4 shadow-sm">
+      <h2 class="h4 border-bottom pb-2 mb-3">Редагування профілю</h2>
+
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+
+        <div class="mb-3">
+          <%= f.label :name, "Ім'я", class: "form-label" %>
+          <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :email, "Email", class: "form-label" %>
+          <%= f.email_field :email, autocomplete: "email", class: "form-control" %>
+        </div>
+
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div class="alert alert-info">Очікується підтвердження для: <%= resource.unconfirmed_email %></div>
+        <% end %>
+
+        <div class="mb-3">
+          <%= f.label :password, "Новий пароль", class: "form-label" %>
+          <span class="form-text">(залиште порожнім, якщо не змінюєте)</span>
+          <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :password_confirmation, "Підтвердження нового пароля", class: "form-label" %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :current_password, "Поточний пароль", class: "form-label" %>
+          <span class="form-text">(потрібен для підтвердження змін)</span>
+          <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
+        </div>
+
+        <%= f.submit "Оновити", class: "btn btn-primary" %>
+      <% end %>
+
+      <div class="mt-4 pt-3 border-top d-flex justify-content-between align-items-center">
+        <%= button_to "Видалити обліковий запис", registration_path(resource_name),
+                      data: { confirm: "Ви впевнені?", turbo_confirm: "Ви впевнені?" },
+                      method: :delete,
+                      class: "btn btn-outline-danger btn-sm" %>
+        <%= link_to "Назад", :back, class: "btn btn-outline-secondary btn-sm" %>
+      </div>
+    </div>
+  </div>
+</div>

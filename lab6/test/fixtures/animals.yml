@@ -3,11 +3,13 @@ one:
   species: Dog
   age: 3
   status: Шукають дім
-  description: Friendly dog
+  description: Friendly dog looking for a loving home.
+  user: one
 
 two:
   name: Murka
   species: Cat
   age: 2
   status: Влаштовані
-  description: Calm cat
+  description: Calm cat already adopted by a family.
+  user: two

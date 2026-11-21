@@ -1,8 +1,11 @@
 class AnimalsController < ApplicationController
+  before_action :authenticate_user!, except: %i[ index show ]
   before_action :set_animal, only: %i[ show edit update destroy ]
+  before_action :authorize_owner_or_admin!, only: %i[ edit update destroy ]
+  before_action :authorize_admin!, only: :destroy_all
 
   def index
-    @animals = Animal.all
+    @animals = Animal.includes(:user).with_attached_image.all
   end
 
   def show
@@ -16,7 +19,7 @@ class AnimalsController < ApplicationController
   end
 
   def create
-    @animal = Animal.new(animal_params)
+    @animal = current_user.animals.build(animal_params)
 
     respond_to do |format|
       if @animal.save
@@ -61,6 +64,18 @@ class AnimalsController < ApplicationController
     end
 
     def animal_params
-      params.expect(animal: [ :name, :species, :age, :status, :description ])
+      params.expect(animal: [ :name, :species, :age, :status, :description, :image ])
+    end
+
+    def authorize_owner_or_admin!
+      unless current_user.admin? || @animal.user == current_user
+        redirect_to animals_path, alert: "У вас немає прав для редагування або видалення цього запису."
+      end
+    end
+
+    def authorize_admin!
+      unless current_user.admin?
+        redirect_to animals_path, alert: "Тільки адміністратор може видалити всі записи."
+      end
     end
 end

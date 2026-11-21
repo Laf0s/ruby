@@ -1,7 +1,14 @@
 <div id="<%= dom_id animal %>">
+  <% if animal.image.attached? %>
+    <div class="mb-3">
+      <%= image_tag animal.image, class: "img-fluid rounded border", style: "max-height: 320px;" %>
+    </div>
+  <% end %>
+
   <p class="mb-2"><strong>Кличка:</strong> <%= animal.name %></p>
   <p class="mb-2"><strong>Вид:</strong> <%= animal.species %></p>
   <p class="mb-2"><strong>Вік:</strong> <%= animal.age.present? ? "#{animal.age} р." : "не вказано" %></p>
   <p class="mb-2"><strong>Статус:</strong> <%= animal.status %></p>
+  <p class="mb-2"><strong>Автор:</strong> <%= animal.user.name %></p>
   <p class="mb-0"><strong>Опис:</strong> <%= animal.description %></p>
 </div>

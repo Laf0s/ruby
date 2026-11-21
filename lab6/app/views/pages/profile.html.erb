@@ -1,0 +1,59 @@
+<% content_for :title, "Мій кабінет" %>
+
+<div class="bg-white border rounded p-4 shadow-sm mb-4">
+  <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+    <div>
+      <h1 class="h3 mb-1">Особистий кабінет: <%= current_user.name %></h1>
+      <p class="text-muted mb-0">
+        Email: <%= current_user.email %> &bull;
+        Роль: <span class="badge <%= current_user.admin? ? 'bg-dark' : 'bg-secondary' %>"><%= current_user.role %></span>
+      </p>
+    </div>
+    <%= link_to "Редагувати профіль", edit_user_registration_path, class: "btn btn-outline-primary btn-sm" %>
+  </div>
+</div>
+
+<div class="bg-white border rounded p-4 shadow-sm">
+  <h2 class="h5 border-bottom pb-2 mb-3">Мої створені тварини (<%= @animals.count %>)</h2>
+
+  <% if @animals.empty? %>
+    <p class="text-muted mb-0">Ви ще не створили жодного запису.</p>
+  <% else %>
+    <div class="table-responsive">
+      <table class="table table-striped table-hover align-middle mb-0">
+        <thead class="table-light">
+          <tr>
+            <th>Фото</th>
+            <th>Кличка</th>
+            <th>Вид</th>
+            <th>Статус</th>
+            <th class="text-end">Дії</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @animals.each do |animal| %>
+            <tr>
+              <td>
+                <% if animal.image.attached? %>
+                  <%= image_tag animal.image, class: "rounded", style: "width: 50px; height: 50px; object-fit: cover;" %>
+                <% else %>
+                  <span class="text-muted small">Немає</span>
+                <% end %>
+              </td>
+              <td class="fw-semibold"><%= animal.name %></td>
+              <td><%= animal.species %></td>
+              <td><%= animal.status %></td>
+              <td class="text-end text-nowrap">
+                <%= link_to "Переглянути", animal, class: "btn btn-sm btn-outline-primary me-1" %>
+                <%= link_to "Редагувати", edit_animal_path(animal), class: "btn btn-sm btn-outline-secondary me-1" %>
+                <%= button_to "Видалити", animal, method: :delete,
+                              class: "btn btn-sm btn-outline-danger d-inline",
+                              form: { class: "d-inline", data: { turbo_confirm: "Видалити #{animal.name}?" } } %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>

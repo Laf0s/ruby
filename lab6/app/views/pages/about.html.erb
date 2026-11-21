@@ -3,18 +3,30 @@
 <div class="row justify-content-center">
   <div class="col-lg-9">
     <div class="bg-white border rounded p-4 shadow-sm">
-      <h1 class="h3 border-bottom pb-2 mb-3">Лабораторна робота № 7</h1>
-      <p class="mb-2"><strong>Тема:</strong> Робота з компонентами MVC-RoR проєкту.</p>
-      <p class="mb-4"><strong>Мета роботи:</strong> навчитися створювати веб-аплікації із хедерами, футерами та Bootstrap.</p>
+      <h1 class="h3 border-bottom pb-2 mb-3">Лабораторна робота № 7–8</h1>
+      <p class="mb-2"><strong>Предметна область (Варіант 35):</strong> Притулок для тварин (<code>Animal</code>).</p>
+      <p class="mb-4"><strong>Мета:</strong> створити веб-застосунок із Bootstrap, автентифікацією (Devise), ролями доступу, асоціаціями моделей та завантаженням зображень (Active Storage).</p>
 
-      <h2 class="h5 mb-3">Завдання (Варіант 35 — Притулок для тварин)</h2>
+      <h2 class="h5 mb-3">Реалізована функціональність</h2>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item px-0">Додати до проєкту хедер і футер.</li>
-        <li class="list-group-item px-0">У футері розмістити контактну інформацію про розробника та реквізити благодійного фонду.</li>
-        <li class="list-group-item px-0">Приєднати до проєкту фреймворк Bootstrap.</li>
-        <li class="list-group-item px-0">Розмістити Nav tab (Шукають дім / Влаштовані / Потрібна допомога) та кнопку «Donate/Допомогти» у хедері.</li>
-        <li class="list-group-item px-0">Приєднати маршрути: «Про проєкт», «Створити тварину», «Показати всіх тварин», «Видалити всіх тварин».</li>
-        <li class="list-group-item px-0">Видалити зі сторінок дії, які продубльовані в навбарі.</li>
+        <li class="list-group-item px-0">
+          <strong>Макет і Bootstrap (ЛР7):</strong> хедер із <code>nav-pills</code>, кнопка «Donate / Допомогти» з модальним вікном, футер із реквізитами фонду та контактами розробника, вкладки статусів <code>nav-pills</code> + <code>tab-content</code>.
+        </li>
+        <li class="list-group-item px-0">
+          <strong>Автентифікація та ролі (Devise):</strong> реєстрація та вхід користувачів із полем <code>name</code>, розподіл ролей через <code>enum :role, { user: 0, admin: 1 }</code> та перевірка <code>admin?</code>.
+        </li>
+        <li class="list-group-item px-0">
+          <strong>Зв’язки між моделями:</strong> один користувач має багато тварин (<code>User has_many :animals, dependent: :destroy</code>), кожна тварина належить користувачу (<code>Animal belongs_to :user</code>).
+        </li>
+        <li class="list-group-item px-0">
+          <strong>Валідації:</strong> для <code>User</code> — обов’язкові <code>name</code> і унікальний <code>email</code>; для <code>Animal</code> — обов’язкові <code>name</code> (2–50 символів), <code>species</code>, <code>description</code> (10–500 символів), цілий невід’ємний <code>age</code>, допустимий <code>status</code>.
+        </li>
+        <li class="list-group-item px-0">
+          <strong>Робота із зображеннями (Active Storage):</strong> прикріплення фото (<code>has_one_attached :image</code>) з перевіркою формату (JPEG, PNG, WebP) і розміру (до 5 МБ).
+        </li>
+        <li class="list-group-item px-0">
+          <strong>Авторизація (права доступу):</strong> створювати записи можуть лише авторизовані користувачі; редагувати й видаляти — лише автор запису або <code>admin</code>; повне очищення таблиці (<code>destroy_all</code>) доступне лише для <code>admin</code>.
+        </li>
       </ul>
     </div>
   </div>

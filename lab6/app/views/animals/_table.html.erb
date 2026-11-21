@@ -7,9 +7,11 @@
     <table class="table table-striped table-hover align-middle mb-0">
       <thead class="table-light">
         <tr>
+          <th>Фото</th>
           <th>Кличка</th>
           <th>Вид</th>
           <th>Вік</th>
+          <th>Автор</th>
           <th>Опис</th>
           <th class="text-end">Дії</th>
         </tr>
@@ -17,13 +19,23 @@
       <tbody>
         <% animals.each do |animal| %>
           <tr>
+            <td>
+              <% if animal.image.attached? %>
+                <%= image_tag animal.image, class: "rounded", style: "width: 60px; height: 60px; object-fit: cover;" %>
+              <% else %>
+                <span class="text-muted small">Немає</span>
+              <% end %>
+            </td>
             <td class="fw-semibold"><%= animal.name %></td>
             <td><%= animal.species %></td>
             <td><%= animal.age.present? ? "#{animal.age} р." : "—" %></td>
-            <td class="text-muted"><%= animal.description %></td>
+            <td><%= animal.user.name %></td>
+            <td class="text-muted"><%= truncate(animal.description, length: 100) %></td>
             <td class="text-end text-nowrap">
               <%= link_to "Переглянути", animal, class: "btn btn-sm btn-outline-primary me-1" %>
-              <%= link_to "Редагувати", edit_animal_path(animal), class: "btn btn-sm btn-outline-secondary" %>
+              <% if user_signed_in? && (current_user.admin? || animal.user == current_user) %>
+                <%= link_to "Редагувати", edit_animal_path(animal), class: "btn btn-sm btn-outline-secondary" %>
+              <% end %>
             </td>
           </tr>
         <% end %>

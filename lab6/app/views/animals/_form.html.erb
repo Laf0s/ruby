@@ -34,5 +34,10 @@
     <%= form.text_area :description, rows: 3, class: "form-control" %>
   </div>
 
+  <div class="mb-3">
+    <%= form.label :image, "Зображення (JPEG, PNG, WebP, до 5 МБ)", class: "form-label" %>
+    <%= form.file_field :image, accept: "image/jpeg,image/png,image/webp", class: "form-control" %>
+  </div>
+
   <%= form.submit "Зберегти", class: "btn btn-primary" %>
 <% end %>
